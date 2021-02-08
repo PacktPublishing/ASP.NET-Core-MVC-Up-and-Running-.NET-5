@@ -1,0 +1,11 @@
+.NET 5 RC1
+Hello,
+
+The current version of .NET 5 is RC 1. Please make sure to update visual studio 2019 preview and install .net 5 RC 1
+
+https://dotnet.microsoft.com/download/dotnet/5.0
+
+Thanks,
+
+Bhrugen
+
