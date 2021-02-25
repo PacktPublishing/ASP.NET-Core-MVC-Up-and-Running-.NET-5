@@ -1,4 +1,7 @@
 Hi,
 
-Kindly find all the Project Resources on this URL: https://www.dotnetmastery.com
 Refer to video 1.4 Project Resources for any assitance
+
+
+Kindly find all the Project Resources of Part 1 of this course on this Link: https://github.com/DotNetMastery/Rocky
+and for Part 2, on this link: https://github.com/bhrugen/Rocky-Part-2
