@@ -1,0 +1,105 @@
+﻿@page
+@model RegisterModel
+@using Rocky_Utility
+
+    <div class="py-4">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="row form-group">
+            <div class="col-8 offset-2">
+                <div class="card">
+                    <div class="card-body px-lg-5 pt-4">
+                        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                            <h3 class="col-12 text-success text-center py-4">
+                                @if (User.IsInRole(WC.AdminRole))
+                                {
+                                    <strong>Register an Admin Account</strong>
+                                }
+                                else
+                                {
+                                    <strong>Register</strong>
+                                }
+                            </h3>
+                            <hr />
+                            <div class="py-2">
+                                <input asp-for="Input.FullName" placeholder="Name" class="form-control" />
+                                <span asp-validation-for="Input.FullName" class="text-danger"></span>
+                            </div>
+
+                            <div class="py-2">
+                                <input asp-for="Input.Email" placeholder="Email" type="email" class="form-control" />
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="py-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">+1</span>
+                                    </div>
+                                    <input asp-for="Input.PhoneNumber" placeholder="Phone Number" type="text" class="form-control" />
+                                </div>
+                                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-row row py-2">
+                                <div class="col-6">
+                                    <input asp-for="Input.Password" placeholder="Password" type="password" class="form-control" />
+                                </div>
+                                <div class="col-6">
+                                    <input asp-for="Input.ConfirmPassword" placeholder="Confirm Password" type="password" class="form-control" />
+
+                                </div>
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+                            <div class="py-2">
+                                @if (User.IsInRole(WC.AdminRole))
+                                {
+                                    <button type="submit" class="btn btn-warning form-control">Register Admin User</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Register</button>
+                                }
+                            </div>
+                        </form>
+                        @if (!User.IsInRole(WC.AdminRole))
+                        {
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <p>
+                                By clicking <em>Register</em> you agree to our <a href="" target="_blank"> terms of service </a>
+                            </p>
+                            <hr />
+                            <div class="row">
+                                <p>
+                                    @foreach (var provider in Model.ExternalLogins)
+                                    {
+                                        @if (provider.Name.ToLower().Contains("facebook"))
+                                        {
+                                            <button type="submit" class="btn btn-block facebook-btn form-control"
+                                                    name="provider" value="@provider.Name"
+                                                    title="Log in using your @provider.DisplayName account">
+                                                <i class="fab fa-facebook-square"></i> @provider.DisplayName
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                        }
+                                    }
+                                </p>
+                            </div>
+                        </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
